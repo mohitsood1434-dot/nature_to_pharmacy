@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Nature to Pharmacy — Comparative Evidence Analysis</title>
+<meta name="description" content="An educational research platform comparing natural bioactive compounds with modern therapeutic approaches through evidence type, research activity and mechanism." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   NATURE TO PHARMACY — design tokens
+   Palette: forest ink, emerald, sage, ivory, gold, charcoal
+   ============================================================ */
+:root{
+  --sage:#8FB3A0;
+  --radius:18px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.68,.24,1);
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --display:'Plus Jakarta Sans',system-ui,sans-serif;
+  --body:'DM Sans',system-ui,sans-serif;
+}
+html[data-theme="dark"]{
+  --bg:#060F0B;
+  --bg-2:#0B1812;
+  --ink:#F2F5EF;
+  --ink-soft:#C6D6CB;
+  --ink-faint:#9AB1A4;
+  --line:rgba(143,179,160,.22);
+  --line-strong:rgba(143,179,160,.42);
+  --glass:rgba(21,42,32,.66);
+  --glass-2:rgba(11,24,18,.88);
+  --shadow:0 24px 60px -30px rgba(0,0,0,.9);
+  --grid:rgba(143,179,160,.08);
+  --halo:rgba(47,163,122,.34);
+  --emerald:#2FA37A;
+  --emerald-soft:#63D6A8;
+  --gold:#E3C25A;
+  --btn-ink:#04120C;
+}
+html[data-theme="light"]{
+  --bg:#E4E8E0;
+  --bg-2:#EFF2EC;
+  --ink:#08130D;
+  --ink-soft:#1C2C24;
+  --ink-faint:#3A4B42;
+  --line:rgba(8,19,13,.24);
+  --line-strong:rgba(8,19,13,.46);
+  --glass:rgba(255,255,255,.90);
+  --glass-2:rgba(255,255,255,.97);
+  --shadow:0 20px 44px -26px rgba(8,19,13,.42);
+  --grid:rgba(8,19,13,.07);
+  --halo:rgba(8,92,66,.22);
+  --emerald:#0A6B4B;
+  --emerald-soft:#064B34;
+  --gold:#6B4E04;
+  --btn-ink:#FFFFFF;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  overflow-x:hidden;
+  transition:background .5s var(--ease),color .5s var(--ease);
+}
+body::before{ /* fine grain */
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+body::after{ /* lab grid */
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 20%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 20%,transparent 75%);
+}
+main,header,footer{position:relative;z-index:1}
+h1,h2,h3,h4{font-family:var(--display);font-weight:800;letter-spacing:-.032em;line-height:1.06;margin:0;color:var(--ink)}
+p{margin:0}
+a{color:inherit}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--emerald-soft);outline-offset:3px;border-radius:6px}
+::selection{background:var(--emerald);color:var(--btn-ink)}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--emerald-soft);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--emerald);opacity:.7;display:inline-block}
+.section{padding:96px 0;position:relative}
+.section-head{max-width:660px;margin-bottom:44px}
+.section-head h2{font-size:clamp(28px,4.4vw,44px);margin:16px 0 14px}
+.section-head p{color:var(--ink-soft);font-size:16.5px;font-weight:500}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line-strong),transparent)}
+
+/* ---------- glass surface ---------- */
+.glass{
+  background:var(--glass);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  box-shadow:var(--shadow);
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 22px;border-radius:999px;border:1px solid var(--line-strong);
+  background:var(--glass-2);font-weight:700;font-size:14.5px;cursor:pointer;
+  transition:transform .35s var(--ease),background .3s,border-color .3s,box-shadow .3s;
+  text-decoration:none;white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px);border-color:var(--emerald);box-shadow:0 12px 30px -16px var(--halo)}
+.btn-primary{background:var(--emerald);border-color:var(--emerald);color:var(--btn-ink)}
+.btn-primary:hover{background:var(--emerald-soft);border-color:var(--emerald-soft)}
+.btn-sm{padding:9px 16px;font-size:13px}
+
+/* ---------- navbar ---------- */
+header.nav{position:sticky;top:0;z-index:60;transition:background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+header.nav.scrolled{background:var(--glass-2);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+.nav-in{display:flex;align-items:center;gap:18px;height:70px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:-.02em;text-decoration:none}
+.brand .mark{width:30px;height:30px;flex:none}
+.nav-links{display:flex;gap:4px;margin-left:auto;position:relative}
+.nav-links a{
+  font-size:13.5px;padding:9px 13px;border-radius:999px;text-decoration:none;color:var(--ink-soft);
+  transition:color .25s,background .25s;font-weight:500;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--ink);background:var(--halo)}
+.nav-tools{display:flex;align-items:center;gap:8px;margin-left:8px}
+.icon-btn{width:38px;height:38px;border-radius:999px;border:1px solid var(--line);background:transparent;display:grid;place-items:center;cursor:pointer;transition:border-color .3s,transform .3s}
+.icon-btn:hover{border-color:var(--emerald);transform:translateY(-1px)}
+.burger{display:none}
+.mobile-menu{display:none;flex-direction:column;gap:2px;padding:10px 14px 20px}
+.mobile-menu a{padding:13px 8px;border-bottom:1px solid var(--line);text-decoration:none;font-size:15px;font-weight:500}
+.mobile-menu a:last-child{border-bottom:none}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 40px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(36px,6.1vw,66px);font-weight:800;letter-spacing:-.04em}
+.hero h1 em{font-style:normal;color:var(--emerald-soft);position:relative;white-space:nowrap}
+.hero-sub{color:var(--ink-soft);font-size:17.5px;font-weight:500;max-width:520px;margin:22px 0 30px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.12em;text-transform:uppercase;margin-top:26px}
+.chain{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:20px}
+.chain b{color:var(--emerald-soft);font-weight:500}
+
+/* orb */
+.orb-wrap{position:relative;aspect-ratio:1;max-width:460px;margin-inline:auto;width:100%}
+.orb-halo{position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle at 42% 38%,var(--halo),transparent 62%);filter:blur(22px)}
+.orb-svg{position:relative;width:100%;height:100%;overflow:visible}
+.spin{transform-origin:200px 200px;animation:spin 46s linear infinite}
+.spin-rev{transform-origin:200px 200px;animation:spin 62s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pulse{animation:pulse 4.6s var(--ease) infinite}
+@keyframes pulse{0%,100%{opacity:.35;r:3}50%{opacity:1;r:4.6}}
+.float-tag{
+  position:absolute;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  padding:7px 12px;border-radius:999px;background:var(--glass-2);border:1px solid var(--line);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);white-space:nowrap;
+  animation:bob 9s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+.stat{background:var(--bg-2);padding:26px 22px}
+.stat .num{color:var(--emerald-soft)}
+.stat .num{font-family:var(--display);font-size:34px;font-weight:800;letter-spacing:-.04em;color:var(--emerald-soft)}
+.stat .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+
+/* ---------- filters / search ---------- */
+.toolbar{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:26px}
+.search{position:relative;flex:1;min-width:220px}
+.search input{
+  width:100%;padding:12px 16px 12px 42px;border-radius:999px;border:1px solid var(--line);
+  background:var(--glass);color:var(--ink);font-family:var(--body);font-size:14.5px;
+}
+.search input::placeholder{color:var(--ink-faint)}
+.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);opacity:.6}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:transparent;
+  font-size:13px;cursor:pointer;white-space:nowrap;color:var(--ink-soft);transition:all .28s var(--ease);
+}
+.chip:hover{border-color:var(--emerald);color:var(--ink)}
+.chip.on{background:var(--emerald);border-color:var(--emerald);color:var(--btn-ink);font-weight:600}
+
+/* ---------- compound cards ---------- */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:18px}
+.ccard{
+  position:relative;padding:22px;cursor:pointer;overflow:hidden;text-align:left;width:100%;
+  transition:transform .4s var(--ease),border-color .4s,box-shadow .4s;
+  background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+}
+.ccard:hover{transform:translateY(-6px);border-color:var(--line-strong);box-shadow:0 26px 50px -28px var(--halo)}
+.ccard .glow{position:absolute;inset:-40% 55% 55% -40%;background:radial-gradient(circle,var(--halo),transparent 65%);opacity:0;transition:opacity .5s;pointer-events:none}
+.ccard:hover .glow{opacity:1}
+.ccard .leaf{font-size:26px;display:block;transition:transform .5s var(--ease)}
+.ccard:hover .leaf{transform:scale(1.16) rotate(-6deg)}
+.ccard h3{font-size:18.5px;margin:14px 0 3px}
+.ccard .bot{font-family:var(--mono);font-size:11px;color:var(--ink-faint);font-style:normal}
+.ccard .row{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--ink-soft);font-weight:500;padding:8px 0;border-top:1px solid var(--line)}
+.ccard .row span:last-child{text-align:right;color:var(--ink)}
+.ccard .meta{margin-top:14px}
+.ccard .cta{
+  margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--emerald-soft);opacity:0;transform:translateY(6px);transition:all .35s var(--ease);
+}
+.ccard:hover .cta,.ccard:focus-visible .cta{opacity:1;transform:none}
+.tier{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.dots{display:inline-flex;gap:3px}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--line-strong);display:block}
+.dots i.on{background:var(--emerald)}
+.empty{padding:56px 24px;text-align:center;color:var(--ink-soft);border:1px dashed var(--line-strong);border-radius:var(--radius)}
+.empty b{display:block;font-family:var(--display);color:var(--ink);font-size:18px;margin-bottom:6px}
+
+/* ---------- detail drawer ---------- */
+.drawer-bg{position:fixed;inset:0;background:rgba(3,10,7,.72);backdrop-filter:blur(6px);z-index:80;opacity:0;pointer-events:none;transition:opacity .4s}
+.drawer-bg.open{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:min(760px,100%);z-index:90;
+  background:var(--bg-2);border-left:1px solid var(--line-strong);
+  transform:translateX(102%);transition:transform .52s var(--ease);
+  overflow-y:auto;overscroll-behavior:contain;
+}
+.drawer.open{transform:none}
+.drawer-head{position:sticky;top:0;background:var(--bg-2);border-bottom:1px solid var(--line);padding:20px 26px;display:flex;gap:14px;align-items:flex-start;z-index:2}
+.drawer-body{padding:26px}
+.drawer h2{font-size:clamp(24px,4vw,34px)}
+.block{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--glass);margin-bottom:16px}
+.block h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--emerald-soft);font-weight:500;margin-bottom:12px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:10px 18px;font-size:14.5px}
+.kv dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);padding-top:3px}
+.kv dd{margin:0;color:var(--ink)}
+.bars{display:flex;flex-direction:column;gap:13px}
+.bar-row{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;font-size:13.5px}
+.bar-track{grid-column:1/-1;height:7px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--emerald),var(--emerald-soft));width:0;transition:width 1.1s var(--ease)}
+.bar-val{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.note{font-size:12.75px;color:var(--ink-faint);line-height:1.55}
+.pill{display:inline-block;padding:5px 11px;border-radius:999px;border:1px solid var(--line-strong);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.pill.warn{border-color:rgba(201,162,39,.5);color:var(--gold)}
+
+/* flow */
+.flow{display:flex;flex-direction:column;gap:0}
+.flow-step{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;padding-bottom:18px;position:relative}
+.flow-step:not(:last-child)::before{content:"";position:absolute;left:21px;top:40px;bottom:0;width:1px;background:linear-gradient(var(--emerald),var(--line))}
+.flow-node{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);background:var(--bg);font-size:19px}
+.flow-step h5{font-family:var(--display);font-size:15.5px;margin:9px 0 4px;font-weight:600}
+.flow-step p{font-size:13.5px;color:var(--ink-soft)}
+
+/* ---------- comparison lab ---------- */
+.lab{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px}
+.selector{padding:20px}
+.selector label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:9px}
+select{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line-strong);
+  background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;cursor:pointer;
+}
+.matrix{width:100%;border-collapse:collapse;font-size:14px}
+.matrix th,.matrix td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.matrix thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald-soft);font-weight:500}
+.matrix tbody th{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:400;width:180px}
+.matrix td{color:var(--ink-soft);font-weight:500}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--glass)}
+
+/* ---------- charts ---------- */
+.chart-card{padding:22px}
+.chart-card h4{font-family:var(--display);font-size:16px;margin-bottom:2px}
+.chart-card .cap{font-size:12.5px;color:var(--ink-faint);margin-bottom:16px}
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+svg .axis{stroke:var(--line);stroke-width:1;fill:none}
+svg .axis-text{fill:var(--ink-faint);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em}
+svg .series-a{fill:rgba(47,163,122,.24);stroke:var(--emerald);stroke-width:2}
+svg .series-b{fill:rgba(201,162,39,.16);stroke:var(--gold);stroke-width:2;stroke-dasharray:4 3}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:12px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:7px}
+.hbar{display:flex;flex-direction:column;gap:11px}
+.hbar .r{display:grid;grid-template-columns:112px 1fr 44px;gap:12px;align-items:center;font-size:13px}
+.hbar .t{height:9px;border-radius:99px;background:var(--line);overflow:hidden}
+.hbar .f{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--emerald),var(--emerald-soft));transition:width 1.2s var(--ease)}
+.hbar .v{font-family:var(--mono);font-size:12px;color:var(--ink-soft);text-align:right}
+
+/* ---------- evidence gap ---------- */
+.gap-legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:20px;font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase}
+.gap-row{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+.gap-name{font-size:14px;font-weight:600;font-family:var(--display)}
+.gap-track{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;position:relative}
+.gap-node{
+  height:34px;border-radius:9px;border:1px solid var(--line);background:var(--line);
+  cursor:pointer;position:relative;transition:transform .3s var(--ease),box-shadow .3s;
+}
+.gap-node:hover{transform:translateY(-3px)}
+.gap-node.sel{box-shadow:0 0 0 2px var(--emerald-soft);animation:nodepulse 1.6s ease-in-out infinite}
+@keyframes nodepulse{0%,100%{box-shadow:0 0 0 2px var(--emerald-soft)}50%{box-shadow:0 0 0 6px rgba(47,163,122,.18)}}
+.gap-head{display:grid;grid-template-columns:170px 1fr;gap:18px;font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint)}
+.gap-head div:last-child{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.gap-detail{margin-top:22px;padding:20px;border-left:2px solid var(--emerald);background:var(--glass);border-radius:0 14px 14px 0}
+.gap-detail h4{font-size:16px;margin-bottom:6px;font-family:var(--display)}
+.gap-detail p{font-size:14px;color:var(--ink-soft)}
+
+/* ---------- survey ---------- */
+.survey-shell{max-width:760px;margin:0 auto;padding:30px}
+.prog-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:11px}
+.prog{height:5px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:30px}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--emerald),var(--emerald-soft));transition:width .6s var(--ease)}
+.q-title{font-size:clamp(21px,3.4vw,27px);margin-bottom:8px}
+.q-help{color:var(--ink-soft);font-size:14px;margin-bottom:22px}
+.opts{display:grid;gap:10px}
+.opts.two{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.opts.scale{grid-template-columns:repeat(5,1fr)}
+.opt{
+  padding:14px 16px;border-radius:13px;border:1px solid var(--line);background:var(--glass);
+  cursor:pointer;text-align:left;font-size:14.5px;transition:all .3s var(--ease);display:flex;gap:11px;align-items:center;
+}
+.opt:hover{border-color:var(--emerald);transform:translateX(3px)}
+.opts.scale .opt{flex-direction:column;justify-content:center;text-align:center;gap:5px;padding:16px 8px}
+.opts.scale .opt:hover{transform:translateY(-3px)}
+.opt.on{border-color:var(--emerald);background:var(--halo);box-shadow:inset 0 0 0 1px var(--emerald)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+.opts.scale .opt .k{font-size:19px;color:var(--ink);font-family:var(--display);font-weight:700}
+.survey-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}
+.err{color:var(--gold);font-size:13px;font-family:var(--mono);margin-top:14px;display:none}
+.err.show{display:block}
+.done-mark{width:64px;height:64px;margin:0 auto 20px;border-radius:50%;border:1px solid var(--emerald);display:grid;place-items:center;animation:ring .9s var(--ease)}
+@keyframes ring{from{transform:scale(.7);opacity:0}to{transform:none;opacity:1}}
+
+/* ---------- insights ---------- */
+.ins-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.ins{padding:22px;position:relative;overflow:hidden}
+.ins .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.ins .val{font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.ins .sub{font-size:13px;color:var(--ink-soft);margin-top:9px}
+
+/* ---------- methodology / sources ---------- */
+.acc{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--glass);margin-bottom:10px}
+.acc summary{padding:17px 20px;cursor:pointer;font-family:var(--display);font-weight:600;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font-family:var(--mono);color:var(--emerald-soft);font-size:18px}
+.acc[open] summary::after{content:"–"}
+.acc .acc-body{padding:0 20px 20px;font-size:14.5px;color:var(--ink-soft)}
+.src-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.src{padding:16px 18px;border:1px solid var(--line);border-radius:13px;text-decoration:none;display:block;transition:all .3s var(--ease);background:var(--glass)}
+.src:hover{border-color:var(--emerald);transform:translateY(-3px)}
+.src b{display:block;font-family:var(--display);font-size:14.5px;margin-bottom:4px}
+.src span{font-size:12.5px;color:var(--ink-faint)}
+
+/* ---------- disclaimer + footer ---------- */
+.disclaim{
+  display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border-radius:14px;
+  border:1px solid rgba(201,162,39,.32);background:rgba(201,162,39,.07);font-size:13.5px;color:var(--ink-soft);
+}
+.disclaim b{color:var(--ink);font-family:var(--display)}
+footer{border-top:1px solid var(--line);padding:56px 0 34px;margin-top:40px}
+.credit{
+  background:linear-gradient(150deg,#0C1F17,#0A1812 60%,#122A20);
+  border:1px solid rgba(143,179,160,.26);border-radius:26px;
+  padding:38px 30px;text-align:center;margin:0 0 52px;color:#F2F5EF;
+  box-shadow:0 26px 60px -34px rgba(0,0,0,.7);
+}
+.credit h3{font-size:clamp(24px,3.6vw,32px);letter-spacing:-.03em;color:#FFFFFF}
+.credit .credit-sub{font-size:14.5px;color:#B7CABE;margin-top:8px}
+.credit-roles{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:32px}
+.credit-role .rl{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#E3C25A;margin-bottom:10px}
+.credit-role .rn{font-family:var(--display);font-weight:700;font-size:17px;color:#FFFFFF}
+.credit-role .rd{font-size:13.5px;color:#B7CABE;margin-top:5px}
+@media (max-width:760px){.credit{padding:30px 20px}.credit-roles{grid-template-columns:1fr;gap:24px}}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px;margin-bottom:34px}
+.foot-links{display:flex;flex-direction:column;gap:9px}
+.foot-links a{text-decoration:none;color:var(--ink-soft);font-size:14px;transition:color .25s}
+.foot-links a:hover{color:var(--emerald-soft)}
+.foot-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+.foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-faint);border-top:1px solid var(--line);padding-top:22px}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .orb-wrap{max-width:330px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .lab{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .section{padding:68px 0}
+  .nav-links{display:none}
+  .burger{display:grid}
+  .card-grid{grid-template-columns:1fr}
+  .kv{grid-template-columns:1fr;gap:3px 0}
+  .kv dd{margin-bottom:9px}
+  .gap-row,.gap-head{grid-template-columns:1fr;gap:8px}
+  .gap-head div:first-child{display:none}
+  .opts.scale{grid-template-columns:repeat(5,1fr);gap:6px}
+  .opts.scale .opt{padding:13px 3px;font-size:10.5px}
+  .survey-shell{padding:22px 18px}
+  .drawer{width:100%}
+  .foot-grid{grid-template-columns:1fr}
+  .hbar .r{grid-template-columns:88px 1fr 38px;font-size:12px}
+  #navCta{display:none !important}
+  .matrix tbody th{width:130px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<!-- =============== NAV =============== -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#home" class="brand">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="var(--line-strong)"/>
+        <path d="M20 31c0-8 4-13 11-14 0 8-4 13-11 14z" fill="var(--emerald)" opacity=".85"/>
+        <path d="M20 31C20 23 16 18 9 17c0 8 4 13 11 14z" fill="var(--sage)" opacity=".5"/>
+        <circle cx="20" cy="11" r="2.6" fill="var(--gold)"/>
+      </svg>
+      Nature to Pharmacy
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="#home">Home</a>
+      <a href="#compounds">Explore</a>
+      <a href="#lab">Compare</a>
+      <a href="#gap">Evidence Lab</a>
+      <a href="#survey">Survey</a>
+      <a href="#insights">Insights</a>
+      <a href="#method">About</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Switch colour theme">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" id="themeIcon"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a href="#compounds" class="btn btn-primary btn-sm" style="display:none" id="navCta">Explore evidence</a>
+      <button class="icon-btn burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu wrap" id="mobileMenu">
+    <a href="#compounds">Explore compounds</a>
+    <a href="#flow">Nature to evidence</a>
+    <a href="#lab">Comparison lab</a>
+    <a href="#gap">Evidence gap</a>
+    <a href="#survey">Survey</a>
+    <a href="#insights">Research insights</a>
+    <a href="#method">Methodology &amp; sources</a>
+  </div>
+</header>
+
+<main>
+<!-- =============== HERO =============== -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="chain"><b>Nature</b> → <b>Bioactive compound</b> → <b>Evidence</b> → <b>Modern therapy</b></div>
+      <h1>Where ancient knowledge meets <em>modern evidence</em></h1>
+      <p class="hero-sub">Explore how natural bioactive compounds compare with modern therapeutic approaches — through evidence type, proposed mechanism, research activity and interactive analysis.</p>
+      <div class="hero-cta">
+        <a href="#compounds" class="btn btn-primary">Explore evidence</a>
+        <a href="#survey" class="btn">Run comparative survey</a>
+      </div>
+      <p class="hero-note">Educational research platform · Not medical advice</p>
+    </div>
+    <div class="orb-wrap" aria-hidden="true">
+      <div class="orb-halo"></div>
+      <svg class="orb-svg" viewBox="0 0 400 400">
+        <defs>
+          <radialGradient id="core" cx="42%" cy="38%">
+            <stop offset="0%" stop-color="var(--emerald-soft)" stop-opacity=".9"/>
+            <stop offset="55%" stop-color="var(--emerald)" stop-opacity=".25"/>
+            <stop offset="100%" stop-color="var(--emerald)" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="200" cy="200" r="118" fill="url(#core)"/>
+        <circle cx="200" cy="200" r="150" fill="none" stroke="var(--line-strong)" stroke-dasharray="2 7"/>
+        <g class="spin">
+          <ellipse cx="200" cy="200" rx="150" ry="58" fill="none" stroke="var(--line-strong)"/>
+          <circle cx="350" cy="200" r="5" fill="var(--emerald)"/>
+          <circle cx="50" cy="200" r="3.4" fill="var(--sage)"/>
+        </g>
+        <g class="spin-rev">
+          <ellipse cx="200" cy="200" rx="58" ry="150" fill="none" stroke="var(--line-strong)"/>
+          <circle cx="200" cy="50" r="4.4" fill="var(--gold)"/>
+        </g>
+        <g class="spin" style="animation-duration:34s">
+          <ellipse cx="200" cy="200" rx="132" ry="132" fill="none" stroke="var(--line)" stroke-dasharray="6 10"/>
+        </g>
+        <!-- molecular skeleton -->
+        <g stroke="var(--emerald)" stroke-width="1.5" fill="none" opacity=".85">
+          <path d="M170 178 L200 160 L230 178 L230 214 L200 232 L170 214 Z"/>
+          <path d="M230 178 L262 162M170 178 L138 162M200 232 L200 266"/>
+        </g>
+        <g fill="var(--emerald-soft)">
+          <circle cx="200" cy="160" r="4" class="pulse"/><circle cx="230" cy="214" r="4" class="pulse" style="animation-delay:.7s"/>
+          <circle cx="170" cy="214" r="4" class="pulse" style="animation-delay:1.4s"/><circle cx="262" cy="162" r="3.4" class="pulse" style="animation-delay:2.1s"/>
+          <circle cx="138" cy="162" r="3.4" class="pulse" style="animation-delay:2.8s"/><circle cx="200" cy="266" r="3.4" class="pulse" style="animation-delay:3.5s"/>
+        </g>
+      </svg>
+      <span class="float-tag" style="top:6%;left:-2%">🌿 Curcumin</span>
+      <span class="float-tag" style="top:34%;right:-6%;animation-delay:1.6s">🔬 Preclinical</span>
+      <span class="float-tag" style="bottom:20%;left:-8%;animation-delay:3.1s">👥 Human studies</span>
+      <span class="float-tag" style="bottom:2%;right:4%;animation-delay:4.4s">⚕ NSAIDs</span>
+    </div>
+  </div>
+</section>
+
+<!-- =============== STATS =============== -->
+<section class="wrap rv" style="padding-bottom:20px">
+  <div class="stats" id="statStrip"></div>
+</section>
+
+<!-- =============== EXPLORE COMPOUNDS =============== -->
+<section class="section" id="compounds">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Compound explorer</div>
+      <h2>Fifteen compounds, mapped against their modern comparators</h2>
+      <p>Each entry pairs a traditional bioactive with the conventional intervention it is most often studied alongside. Ratings describe how much evidence exists — not how well anything works.</p>
+    </div>
+    <div class="toolbar rv">
+      <div class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+        <input id="searchInput" type="search" placeholder="Search compound, botanical name or research area" aria-label="Search compounds">
+      </div>
+      <div class="chips" id="filterChips"></div>
+    </div>
+    <div class="card-grid" id="compoundGrid"></div>
+    <p class="note rv" style="margin-top:22px">Evidence indicators are illustrative editorial ratings of <em>research status</em>, compiled for teaching. They are not clinical efficacy scores. See <a href="#method" style="color:var(--emerald-soft)">Methodology</a>.</p>
+  </div>
+</section>
+
+<!-- =============== FLOW =============== -->
+<section class="section" id="flow" style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">The research pathway</div>
+      <h2>Nature → molecule → mechanism → evidence</h2>
+      <p>A plant is not a medicine, and a mechanism is not a result. This is the road a traditional ingredient has to travel before anyone can call its effect established.</p>
+    </div>
+    <div class="chart-grid">
+      <div class="glass chart-card rv">
+        <h4>Follow one compound through the pathway</h4>
+        <p class="cap">Pick any compound to see where its own evidence currently sits.</p>
+        <select id="flowSelect" aria-label="Choose a compound for the pathway"></select>
+        <div class="flow" id="flowSteps" style="margin-top:22px"></div>
+      </div>
+      <div class="glass chart-card rv">
+        <h4>What each stage can and cannot tell you</h4>
+        <p class="cap">The same finding means very different things at different stages.</p>
+        <div id="stageNotes"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== COMPARISON LAB =============== -->
+<section class="section" id="lab">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Evidence comparison lab</div>
+      <h2>Set a natural compound beside a modern intervention</h2>
+      <p>The matrix compares what is known, how it is known and where the gaps are. It does not compare effectiveness, and equivalent rows do not mean equivalent treatments.</p>
+    </div>
+    <div class="lab rv">
+      <div class="glass selector">
+        <label for="labNatural">Natural compound</label>
+        <select id="labNatural"></select>
+      </div>
+      <div class="glass selector">
+        <label for="labModern">Modern intervention</label>
+        <select id="labModern"></select>
+      </div>
+    </div>
+    <div class="table-scroll rv"><table class="matrix" id="labMatrix"></table></div>
+    <div class="chart-grid rv" style="margin-top:18px">
+      <div class="glass chart-card">
+        <h4>Evidence profile</h4>
+        <p class="cap">Six dimensions of research status, plotted for both sides.</p>
+        <div id="labRadar"></div>
+        <div class="legend">
+          <span><i style="background:var(--emerald)"></i>Natural compound</span>
+          <span><i style="background:var(--gold)"></i>Modern intervention</span>
+        </div>
+      </div>
+      <div class="glass chart-card">
+        <h4>Reading this comparison</h4>
+        <p class="cap">Three cautions that apply to every pairing on this page.</p>
+        <div id="labCaution"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== EVIDENCE GAP =============== -->
+<section class="section" id="gap" style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">The evidence gap</div>
+      <h2>Where the research thins out</h2>
+      <p>Most compounds here are rich in traditional use and laboratory work, and thin on large human trials. That drop-off is the single most useful thing to understand about this field.</p>
+    </div>
+    <div class="gap-legend rv">
+      <span>Filled = evidence exists</span><span>Faint = limited or absent</span><span>Tap any block for detail</span>
+    </div>
+    <div class="rv">
+      <div class="gap-head"><div>Compound</div><div><span>Traditional</span><span>Preclinical</span><span>Human</span><span>Clinical</span></div></div>
+      <div id="gapRows"></div>
+      <div class="gap-detail" id="gapDetail">
+        <h4>Select a block to read the detail</h4>
+        <p>Each block shows how much research of that type exists for the compound — not whether the compound works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== SURVEY =============== -->
+<section class="section" id="survey">
+  <div class="wrap">
+    <div class="section-head rv" style="text-align:center;margin-inline:auto">
+      <div class="eyebrow" style="justify-content:center">Perception survey</div>
+      <h2>Nature &amp; medicine evidence perception survey</h2>
+      <p>Six questions on how people weigh traditional knowledge against scientific evidence. Responses are analysed in aggregate.</p>
+    </div>
+    <div class="glass survey-shell rv" id="surveyShell"></div>
+  </div>
+</section>
+
+<!-- =============== RESULTS =============== -->
+<section class="section" id="results" style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Response dashboard</div>
+      <h2>What did the community say?</h2>
+      <p id="resultsSourceLine">Aggregate view of survey responses currently loaded in this session.</p>
+    </div>
+    <div class="stats rv" id="resultStats" style="margin-bottom:20px"></div>
+    <div class="chart-grid rv" id="resultCharts"></div>
+  </div>
+</section>
+
+<!-- =============== INSIGHTS =============== -->
+<section class="section" id="insights">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Research insights</div>
+      <h2>Patterns in the dataset</h2>
+      <p>Every card below is calculated from the loaded compound and survey data. Where there is not enough data, the card says so instead of guessing.</p>
+    </div>
+    <div class="ins-grid rv" id="insightGrid"></div>
+  </div>
+</section>
+
+<!-- =============== METHODOLOGY + SOURCES =============== -->
+<section class="section" id="method" style="background:var(--bg-2);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Sources &amp; methodology</div>
+      <h2>How this platform classifies evidence</h2>
+      <p>Read this before quoting anything from the rest of the page.</p>
+    </div>
+    <div class="rv" id="methodAcc"></div>
+    <div class="rv" style="margin:34px 0 20px">
+      <div class="eyebrow">Where to verify</div>
+      <h3 style="font-size:22px;margin:14px 0 8px">Primary places to check any claim</h3>
+      <p class="note" style="margin-bottom:18px">This platform ships with no citation list of its own, because inventing one would be worse than having none. These are the databases to search for the real studies.</p>
+      <div class="src-list" id="srcList"></div>
+    </div>
+    <div class="disclaim rv">
+      <span style="font-size:19px">⚠</span>
+      <div><b>Educational use only.</b> This platform is for educational and research exploration. It does not provide medical advice, diagnosis or treatment recommendations. Nothing here suggests replacing prescribed medicine, and no compound shown is presented as safer or more effective than a conventional treatment. Natural products can interact with medication — talk to a qualified clinician before changing anything.</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- =============== FOOTER =============== -->
+<footer>
+  <div class="wrap">
+    <!-- CREDIT BLOCK -->
+    <div class="credit rv">
+      <h3>Nature to Pharmacy</h3>
+      <p class="credit-sub">A Comparative Evidence-Analysis Platform · a student research initiative</p>
+      <div class="credit-roles">
+        <div class="credit-role">
+          <div class="rl">Founder</div>
+          <div class="rn">Shikaina Gill</div>
+          <div class="rd">Grade 11</div>
+        </div>
+        <div class="credit-role">
+          <div class="rl">Faculty Mentor</div>
+          <div class="rn">Mr. Mohit Sood</div>
+          <div class="rd">Department of Information Technology</div>
+        </div>
+        <div class="credit-role">
+          <div class="rl">Head</div>
+          <div class="rn">Mr. Raghu Raja Mehra</div>
+          <div class="rd">iNViCTUS International School, Amritsar</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:12px">
+          <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--line-strong)"/><path d="M20 31c0-8 4-13 11-14 0 8-4 13-11 14z" fill="var(--emerald)" opacity=".85"/><path d="M20 31C20 23 16 18 9 17c0 8 4 13 11 14z" fill="var(--sage)" opacity=".5"/><circle cx="20" cy="11" r="2.6" fill="var(--gold)"/></svg>
+          Nature to Pharmacy
+        </div>
+        <p style="color:var(--ink-soft);font-size:14px;max-width:330px">Exploring the evidence behind nature-inspired therapeutics — what is known, how it is known, and what is still missing.</p>
+      </div>
+      <div>
+        <div class="foot-h">Platform</div>
+        <div class="foot-links">
+          <a href="#compounds">Explore compounds</a><a href="#lab">Comparison lab</a><a href="#gap">Evidence gap</a><a href="#survey">Survey</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-h">Reference</div>
+        <div class="foot-links">
+          <a href="#insights">Research insights</a><a href="#method">Methodology</a><a href="#method">Sources</a><a href="#flow">Research pathway</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Educational and research exploration only · No medical advice, diagnosis or treatment recommendations.</span>
+      <span id="footCredit"></span>
+    </div>
+  </div>
+</footer>
+
+<!-- =============== DETAIL DRAWER =============== -->
+<div class="drawer-bg" id="drawerBg"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" tabindex="-1">
+  <div class="drawer-head">
+    <div style="flex:1">
+      <div class="eyebrow" id="drawerEyebrow">Compound detail</div>
+      <h2 id="drawerTitle" style="margin-top:10px">—</h2>
+    </div>
+    <button class="icon-btn" id="drawerClose" aria-label="Close compound detail">
+      <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+<script>
+/* ==========================================================================
+   DATA LAYER
+   Replace the objects below with Supabase queries when the backend is live.
+   Suggested tables: compounds, evidence, survey_questions, survey_responses,
+   research_sources.  Keys must come from environment variables, never here.
+   --------------------------------------------------------------------------
+   IMPORTANT: the numeric values are ILLUSTRATIVE RATINGS OF RESEARCH STATUS
+   written for teaching. They are not measured efficacy, not trial results and
+   not extracted from any database. Every screen that shows them says so.
+   ========================================================================== */
+const COMPOUNDS = [
+ {id:'curcumin',name:'Turmeric / Curcumin',emoji:'🌿',botanical:'Curcuma longa',bioactive:'Curcumin (a curcuminoid)',cat:['Inflammation','Pain'],area:'Inflammation & pain',
+  modern:'nsaids',traditional:'Long-standing use in Indian households and Ayurvedic practice for swelling, wounds and joint discomfort.',
+  mechanism:'Proposed interference with inflammatory signalling pathways such as NF-κB, studied mainly in cell and animal models.',
+  limits:'Very poor oral bioavailability; many trials are small, short and use different extracts, so results are hard to pool.',
+  humanNote:'Multiple small human trials exist, mostly in osteoarthritis and metabolic markers; larger, longer trials are limited.',
+  ev:{traditional:95,preclinical:92,human:62,clinical:44,volume:90,mechanism:78}},
+
+ {id:'ginger',name:'Ginger',emoji:'🫚',botanical:'Zingiber officinale',bioactive:'Gingerols and shogaols',cat:['Digestive','Inflammation'],area:'Nausea & inflammation',
+  modern:'antiemetics',traditional:'Widely used for nausea, indigestion and cold symptoms across Asian traditional systems.',
+  mechanism:'Proposed action on gut motility and on serotonin receptors involved in nausea signalling.',
+  limits:'Dose and preparation vary widely between studies; effects on pregnancy nausea are better studied than other uses.',
+  humanNote:'Human trials in pregnancy-related and post-operative nausea are among the stronger examples in this dataset.',
+  ev:{traditional:92,preclinical:80,human:70,clinical:52,volume:76,mechanism:70}},
+
+ {id:'ashwagandha',name:'Ashwagandha',emoji:'🌱',botanical:'Withania somnifera',bioactive:'Withanolides',cat:['Stress'],area:'Stress & sleep',
+  modern:'stresscare',traditional:'Classified as a rasayana in Ayurveda and used for fatigue, weakness and restlessness.',
+  mechanism:'Proposed modulation of the stress-hormone axis; supported mainly by animal work and small human studies.',
+  limits:'Trials are typically small and short; extracts differ; long-term safety data and liver-safety reports need attention.',
+  humanNote:'A growing set of small randomised trials on perceived stress and sleep quality; results are promising but not settled.',
+  ev:{traditional:88,preclinical:74,human:58,clinical:38,volume:70,mechanism:60}},
+
+ {id:'tulsi',name:'Tulsi',emoji:'🍃',botanical:'Ocimum tenuiflorum',bioactive:'Eugenol, ursolic acid',cat:['Respiratory','Stress'],area:'Respiratory wellness',
+  modern:'respcare',traditional:'A household remedy for cough, cold and throat irritation, and a plant of religious significance.',
+  mechanism:'Proposed antioxidant and immune-modulating activity, largely from laboratory studies.',
+  limits:'Human research is sparse and often of low methodological quality; outcomes are rarely standardised.',
+  humanNote:'Few controlled human trials; most published work is preclinical or observational.',
+  ev:{traditional:90,preclinical:66,human:34,clinical:20,volume:48,mechanism:52}},
+
+ {id:'honey',name:'Honey',emoji:'🍯',botanical:'Apis mellifera product',bioactive:'Sugars, hydrogen peroxide, phenolics',cat:['Respiratory'],area:'Cough relief',
+  modern:'coughmed',traditional:'Given for sore throat and night-time cough in many cultures, including Indian home practice.',
+  mechanism:'Coating and soothing effect on the throat, plus osmotic activity relevant to wound care.',
+  limits:'Not for infants under one year because of infant botulism risk; sugar load matters for some people.',
+  humanNote:'Paediatric cough is one of the better-studied uses, including comparisons with standard cough preparations.',
+  ev:{traditional:90,preclinical:64,human:74,clinical:58,volume:62,mechanism:66}},
+
+ {id:'aloe',name:'Aloe vera',emoji:'🪴',botanical:'Aloe barbadensis miller',bioactive:'Polysaccharides (acemannan)',cat:['Skin'],area:'Minor skin conditions',
+  modern:'topicalskin',traditional:'Applied to burns, cuts and dry skin across many traditional systems.',
+  mechanism:'Proposed moisturising and wound-environment effects; some anti-inflammatory activity in lab models.',
+  limits:'Product composition varies enormously; oral use of aloe latex carries laxative and safety concerns.',
+  humanNote:'Small trials in minor burns and wound healing exist; quality and consistency are mixed.',
+  ev:{traditional:86,preclinical:70,human:52,clinical:32,volume:58,mechanism:56}},
+
+ {id:'neem',name:'Neem',emoji:'🌳',botanical:'Azadirachta indica',bioactive:'Azadirachtin, nimbidin',cat:['Skin','Dental'],area:'Skin & microbial research',
+  modern:'topicalanti',traditional:'Used for skin complaints and oral hygiene; neem twigs are a traditional tooth-cleaning practice.',
+  mechanism:'Antimicrobial and anti-inflammatory activity observed in laboratory assays.',
+  limits:'Strong laboratory activity has not translated into robust clinical evidence; oral neem oil is toxic to children.',
+  humanNote:'Human data is limited, mostly small dental-plaque and dermatology studies.',
+  ev:{traditional:84,preclinical:82,human:34,clinical:18,volume:56,mechanism:60}},
+
+ {id:'garlic',name:'Garlic / Allicin',emoji:'🧄',botanical:'Allium sativum',bioactive:'Allicin and organosulfur compounds',cat:['Cardiovascular'],area:'Cardiovascular & antimicrobial research',
+  modern:'cardioanti',traditional:'Used as both food and remedy for circulation and infection across many cultures.',
+  mechanism:'Proposed effects on blood-vessel tone and lipid handling; broad antimicrobial activity in vitro.',
+  limits:'Allicin is unstable, so preparation changes what is actually delivered; blood-pressure effects reported are modest.',
+  humanNote:'Reasonable number of human studies on blood pressure and lipids, with modest and inconsistent effects.',
+  ev:{traditional:88,preclinical:80,human:64,clinical:44,volume:74,mechanism:66}},
+
+ {id:'cinnamon',name:'Cinnamon',emoji:'🌰',botanical:'Cinnamomum verum / cassia',bioactive:'Cinnamaldehyde',cat:['Metabolic'],area:'Blood glucose research',
+  modern:'glucosemed',traditional:'A culinary spice also used in traditional preparations for digestion and warmth.',
+  mechanism:'Proposed influence on insulin signalling and glucose uptake, mostly from cell and animal studies.',
+  limits:'Cassia cinnamon contains coumarin, which limits safe intake; human glucose results are inconsistent across trials.',
+  humanNote:'Several human trials in type 2 diabetes with conflicting findings; effect sizes are small where present.',
+  ev:{traditional:74,preclinical:76,human:56,clinical:34,volume:66,mechanism:58}},
+
+ {id:'fenugreek',name:'Fenugreek / Methi',emoji:'🌾',botanical:'Trigonella foenum-graecum',bioactive:'4-hydroxyisoleucine, galactomannan fibre',cat:['Metabolic'],area:'Glycemic control research',
+  modern:'metformin',traditional:'Seeds and leaves used in Indian cooking and traditional practice for digestion and blood sugar.',
+  mechanism:'Soluble fibre slowing glucose absorption, plus proposed effects on insulin secretion.',
+  limits:'Studies are small and heterogeneous; fenugreek is not a substitute for prescribed glucose-lowering therapy.',
+  humanNote:'A modest set of small trials on fasting glucose; nothing approaching the trial base behind standard therapy.',
+  ev:{traditional:80,preclinical:70,human:48,clinical:26,volume:52,mechanism:56}},
+
+ {id:'amla',name:'Amla',emoji:'🫒',botanical:'Phyllanthus emblica',bioactive:'Vitamin C, tannins, polyphenols',cat:['Metabolic','Cardiovascular'],area:'Cholesterol research',
+  modern:'statins',traditional:'A central rasayana ingredient and a component of Triphala.',
+  mechanism:'Proposed antioxidant and lipid-handling effects observed mainly in preclinical models.',
+  limits:'Human lipid trials are few and small; evidence does not support replacing lipid-lowering therapy.',
+  humanNote:'Limited human data on lipid profiles; findings are preliminary.',
+  ev:{traditional:86,preclinical:68,human:38,clinical:20,volume:48,mechanism:52}},
+
+ {id:'triphala',name:'Triphala',emoji:'⚗️',botanical:'Amalaki, Bibhitaki, Haritaki blend',bioactive:'Polyphenol mixture',cat:['Digestive'],area:'Digestive health',
+  modern:'digestive',traditional:'One of the most widely used classical Ayurvedic formulations, taken for digestion and regularity.',
+  mechanism:'Proposed mild laxative and gut-microbiome effects; a multi-ingredient mixture, which complicates study.',
+  limits:'As a blend, active constituents vary between products; controlled human data is thin.',
+  humanNote:'Small human studies on constipation and oral health; larger controlled work is missing.',
+  ev:{traditional:92,preclinical:62,human:34,clinical:18,volume:44,mechanism:48}},
+
+ {id:'peppermint',name:'Peppermint / Menthol',emoji:'🌱',botanical:'Mentha × piperita',bioactive:'Menthol',cat:['Digestive','Pain'],area:'Digestive comfort & cooling analgesia',
+  modern:'topicalpain',traditional:'Used for stomach upset, headache and congestion.',
+  mechanism:'Menthol acts on cold-sensing TRPM8 receptors, producing a cooling sensation; also relaxes smooth muscle.',
+  limits:'Can worsen reflux in some people; topical menthol relieves sensation rather than treating the underlying cause.',
+  humanNote:'Enteric-coated peppermint oil for irritable bowel syndrome has one of the clearer human evidence bases here.',
+  ev:{traditional:80,preclinical:74,human:68,clinical:50,volume:64,mechanism:78}},
+
+ {id:'clove',name:'Clove / Eugenol',emoji:'🌸',botanical:'Syzygium aromaticum',bioactive:'Eugenol',cat:['Dental','Pain'],area:'Dental pain',
+  modern:'dentalpain',traditional:'A classic household response to toothache across India.',
+  mechanism:'Eugenol has local anaesthetic and antiseptic properties and appears in dental materials.',
+  limits:'Relieves symptoms only; it does not treat the underlying dental problem, and undiluted oil can burn tissue.',
+  humanNote:'Small dental studies on topical anaesthesia; eugenol is already accepted within dentistry as a material.',
+  ev:{traditional:88,preclinical:76,human:50,clinical:34,volume:50,mechanism:80}},
+
+ {id:'boswellia',name:'Boswellia serrata',emoji:'🪵',botanical:'Boswellia serrata',bioactive:'Boswellic acids',cat:['Inflammation','Pain'],area:'Inflammation & joint pain',
+  modern:'nsaids',traditional:'Salai guggul resin used in Ayurveda for joint stiffness and swelling.',
+  mechanism:'Proposed inhibition of 5-lipoxygenase, an enzyme in the inflammatory cascade.',
+  limits:'Trials are small and often industry-funded; extract standardisation differs between products.',
+  humanNote:'Several small osteoarthritis trials report symptom improvement; independent replication is limited.',
+  ev:{traditional:82,preclinical:78,human:54,clinical:36,volume:56,mechanism:70}}
+];
+
+const MODERN = {
+ nsaids:{name:'NSAIDs (e.g. ibuprofen)',area:'Inflammation & pain',mechanism:'Well-characterised inhibition of COX enzymes, reducing prostaglandin production.',type:'Regulatory-grade clinical evidence plus decades of post-marketing data.',
+  limits:'Gastrointestinal, kidney and cardiovascular risks with prolonged or high-dose use.',ev:{traditional:20,preclinical:95,human:97,clinical:98,volume:99,mechanism:96}},
+ antiemetics:{name:'Antiemetics / NSAIDs',area:'Nausea & inflammation',mechanism:'Targeted blockade of receptors involved in the vomiting reflex, such as 5-HT₃.',type:'Large randomised trials and established clinical guidelines.',
+  limits:'Side effects vary by drug class; cost and access differ across settings.',ev:{traditional:15,preclinical:92,human:95,clinical:96,volume:94,mechanism:95}},
+ stresscare:{name:'Conventional care for stress and anxiety',area:'Stress & sleep',mechanism:'Structured psychological therapy and, where indicated, medicines acting on specific neurotransmitter systems.',type:'Extensive trial evidence and clinical guidelines, strongest for structured therapy.',
+  limits:'Access, waiting times and stigma remain real barriers; medicines carry their own side-effect profiles.',ev:{traditional:20,preclinical:85,human:94,clinical:95,volume:96,mechanism:88}},
+ respcare:{name:'Conventional symptomatic care for respiratory illness',area:'Respiratory wellness',mechanism:'Symptom-directed treatment, with antibiotics reserved for confirmed bacterial infection.',type:'Guideline-backed clinical evidence, including strong evidence on when not to treat.',
+  limits:'Most viral illness resolves on its own; unnecessary antibiotic use drives resistance.',ev:{traditional:25,preclinical:88,human:93,clinical:94,volume:92,mechanism:90}},
+ coughmed:{name:'Conventional cough preparations',area:'Cough relief',mechanism:'Suppressants or expectorants acting on the cough reflex or on secretions.',type:'Clinical trial evidence exists, and it is frequently unimpressive for over-the-counter syrups.',
+  limits:'Several are not recommended for young children; benefit over placebo is often small.',ev:{traditional:20,preclinical:80,human:88,clinical:86,volume:82,mechanism:80}},
+ topicalskin:{name:'Conventional topical skin treatments',area:'Minor skin conditions',mechanism:'Barrier repair, targeted anti-inflammatory or antimicrobial action depending on the product.',type:'Regulated products with dermatology trial evidence.',
+  limits:'Potency-related side effects, especially with prolonged steroid use.',ev:{traditional:20,preclinical:90,human:93,clinical:92,volume:90,mechanism:92}},
+ topicalanti:{name:'Conventional topical antimicrobials',area:'Skin & microbial research',mechanism:'Defined antimicrobial spectrum with measured susceptibility data.',type:'Microbiological and clinical evidence, with resistance surveillance.',
+  limits:'Resistance and sensitisation risk with overuse.',ev:{traditional:15,preclinical:93,human:92,clinical:91,volume:90,mechanism:94}},
+ cardioanti:{name:'Antihypertensive / antimicrobial therapy',area:'Cardiovascular & antimicrobial research',mechanism:'Defined pharmacological targets with dose-response data and outcome trials.',type:'Large outcome trials measuring events, not just markers.',
+  limits:'Requires monitoring; side effects and adherence are ongoing clinical issues.',ev:{traditional:15,preclinical:94,human:97,clinical:98,volume:97,mechanism:96}},
+ glucosemed:{name:'Conventional glucose-lowering medicines',area:'Blood glucose research',mechanism:'Multiple defined mechanisms with measured HbA1c effects.',type:'Regulatory trials with hard endpoints and long-term follow-up.',
+  limits:'Hypoglycaemia risk with some classes; ongoing monitoring needed.',ev:{traditional:10,preclinical:94,human:97,clinical:98,volume:96,mechanism:95}},
+ metformin:{name:'Metformin',area:'Glycemic control research',mechanism:'Reduces hepatic glucose production and improves insulin sensitivity.',type:'Decades of trial and outcome data, including long-term follow-up studies.',
+  limits:'Gastrointestinal side effects; dose adjustment needed in reduced kidney function.',ev:{traditional:5,preclinical:95,human:98,clinical:99,volume:98,mechanism:94}},
+ statins:{name:'Statins / lipid-lowering therapy',area:'Cholesterol research',mechanism:'HMG-CoA reductase inhibition, reducing LDL cholesterol.',type:'Very large randomised outcome trials measuring cardiovascular events.',
+  limits:'Muscle symptoms in a minority; requires clinical assessment of overall risk.',ev:{traditional:5,preclinical:96,human:99,clinical:99,volume:99,mechanism:97}},
+ digestive:{name:'Conventional digestive interventions',area:'Digestive health',mechanism:'Osmotic or stimulant laxatives, fibre and targeted gut therapies with defined action.',type:'Clinical trial evidence and guideline recommendations.',
+  limits:'Dependence concerns with long-term stimulant use; symptoms may mask other conditions.',ev:{traditional:25,preclinical:88,human:92,clinical:90,volume:88,mechanism:88}},
+ topicalpain:{name:'Conventional topical analgesics',area:'Pain & cooling sensation',mechanism:'Local anti-inflammatory or counter-irritant action at the site of application.',type:'Clinical evidence for topical NSAIDs in localised joint pain is reasonably strong.',
+  limits:'Effect is local; not appropriate for widespread or internal pain.',ev:{traditional:25,preclinical:88,human:90,clinical:88,volume:86,mechanism:90}},
+ dentalpain:{name:'Conventional dental analgesia',area:'Dental pain',mechanism:'Local anaesthetics and systemic analgesics with defined onset and duration.',type:'Established dental clinical evidence.',
+  limits:'Pain relief does not treat the underlying decay or infection; dental care is still required.',ev:{traditional:20,preclinical:92,human:95,clinical:95,volume:92,mechanism:95}}
+};
+
+const CATEGORIES = ['All','Inflammation','Pain','Stress','Respiratory','Digestive','Cardiovascular','Metabolic','Skin','Dental'];
+
+const STAGES = [
+ {k:'traditional',icon:'🌿',t:'Traditional use',d:'Generations of documented practice. Tells you a plant has been used and broadly tolerated. Tells you nothing about whether it works for a defined condition.'},
+ {k:'preclinical',icon:'🧬',t:'Laboratory research',d:'Cell and tissue studies isolate a molecule and look for activity. A strong result here is a reason to investigate, not a reason to take something.'},
+ {k:'mechanism',icon:'⚙️',t:'Proposed mechanism',d:'A plausible biological story for how an effect could happen. Plausibility is cheap; many mechanistically elegant ideas fail in people.'},
+ {k:'human',icon:'👥',t:'Human studies',d:'Small trials in real people, often with surrogate markers, short durations and varied preparations. This is where most compounds here currently sit.'},
+ {k:'clinical',icon:'📚',t:'Clinical evidence',d:'Large, replicated, well-controlled trials measuring outcomes that matter, pooled in systematic reviews. This is the standard modern medicines must meet.'}
+];
+
+const SOURCES = [
+ {t:'PubMed',d:'Biomedical literature index, US National Library of Medicine',u:'https://pubmed.ncbi.nlm.nih.gov/'},
+ {t:'Cochrane Library',d:'Systematic reviews of healthcare interventions',u:'https://www.cochranelibrary.com/'},
+ {t:'NCCIH',d:'US National Center for Complementary and Integrative Health',u:'https://www.nccih.nih.gov/'},
+ {t:'ClinicalTrials.gov',d:'Registry of clinical studies worldwide',u:'https://clinicaltrials.gov/'},
+ {t:'CTRI',d:'Clinical Trials Registry — India',u:'https://ctri.nic.in/'},
+ {t:'World Health Organization',d:'Guidance and monographs on medicinal plants',u:'https://www.who.int/'}
+];
+
+const QUESTIONS = [
+ {id:'q1',type:'grid',q:'Which natural compound are you most familiar with?',help:'Pick the one you have heard about or used most often.',
+  options:COMPOUNDS.map(c=>c.name)},
+ {id:'q2',type:'scale',q:'How familiar are you with Ayurvedic or natural remedies?',help:'1 means not familiar at all, 5 means very familiar.',
+  options:['1','2','3','4','5'],ends:['Not familiar','Very familiar']},
+ {id:'q3',type:'list',q:'Which source do you trust most when evaluating a health claim?',help:'Choose the one you would check first.',
+  options:['Scientific studies','Doctors and clinicians','Traditional knowledge','Government or public health sources','Online content','Personal experience']},
+ {id:'q4',type:'scale',q:'How important is scientific evidence when you evaluate a natural compound?',help:'1 means not important, 5 means essential.',
+  options:['1','2','3','4','5'],ends:['Not important','Essential']},
+ {id:'q5',type:'list',q:'Would you like to see more research comparing natural compounds with modern therapeutics?',help:'',
+  options:['Yes','No','Not sure']},
+ {id:'q6',type:'grid',q:'Which research area interests you most?',help:'One choice only.',
+  options:['Pain','Inflammation','Stress and sleep','Respiratory wellness','Digestive health','Blood glucose','Cholesterol','Skin','Dental','Cardiovascular']}
+];
+
+/* ==========================================================================
+   DEMO RESPONSE SET — clearly labelled, deterministic, for layout only.
+   When Supabase is connected, replace loadResponses() with a real query.
+   ========================================================================== */
+let USING_DEMO = true;
+function seeded(s){return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296}}
+function buildDemoResponses(n){
+  const r=seeded(20260822),out=[];
+  const w1=[0,0,0,0,1,1,1,2,2,2,3,4,4,7,8,8,12,13,13,14];
+  const w3=[0,0,0,1,1,1,1,2,2,3,3,4,5,5];
+  const w6=[0,0,1,1,1,2,2,2,3,4,4,5,6,7,8,9];
+  for(let i=0;i<n;i++){
+    out.push({
+      q1:QUESTIONS[0].options[w1[Math.floor(r()*w1.length)]],
+      q2:String(1+Math.min(4,Math.floor(r()*3)+Math.floor(r()*3))),
+      q3:QUESTIONS[2].options[w3[Math.floor(r()*w3.length)]],
+      q4:String(Math.max(1,Math.min(5,3+Math.round((r()+r()-1)*2)))),
+      q5:r()<0.82?'Yes':(r()<0.6?'Not sure':'No'),
+      q6:QUESTIONS[5].options[w6[Math.floor(r()*w6.length)]],
+      demo:true
+    });
+  }
+  return out;
+}
+let RESPONSES = buildDemoResponses(238);
+
+/* ==========================================================================
+   SMALL HELPERS
+   ========================================================================== */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const byId=id=>COMPOUNDS.find(c=>c.id===id);
+const cssVar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#2FA37A';
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const tierWord=v=>v>=75?'Strong':v>=55?'Moderate':v>=35?'Limited':v>=15?'Early':'Minimal';
+function dots(v){const n=Math.max(1,Math.round(v/20));let h='<span class="dots">';for(let i=0;i<5;i++)h+='<i class="'+(i<n?'on':'')+'"></i>';return h+'</span>';}
+function overall(ev){ // illustrative aggregation, weighted toward human/clinical evidence
+  return Math.round((ev.traditional*.08+ev.preclinical*.14+ev.human*.28+ev.clinical*.30+ev.volume*.10+ev.mechanism*.10));
+}
+function countBy(arr,key){const m={};arr.forEach(o=>{const v=o[key];if(v!=null)m[v]=(m[v]||0)+1});return m;}
+function topOf(m){let k=null,n=-1;for(const x in m)if(m[x]>n){k=x;n=m[x]}return k?{key:k,n}:null;}
+function avg(arr,key){const v=arr.map(o=>Number(o[key])).filter(x=>!isNaN(x));return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}
+
+/* ==========================================================================
+   CHART BUILDERS (hand-drawn SVG — no external chart dependency)
+   ========================================================================== */
+function radar(series,axes,size){
+  size=size||300;const cx=size/2,cy=size/2,R=size/2-38,n=axes.length;
+  const pt=(i,v)=>{const a=(Math.PI*2*i/n)-Math.PI/2;return[cx+Math.cos(a)*R*v/100,cy+Math.sin(a)*R*v/100]};
+  let g='';
+  [25,50,75,100].forEach(ring=>{
+    const p=axes.map((_,i)=>pt(i,ring).join(',')).join(' ');
+    g+=`<polygon points="${p}" class="axis"/>`;
+  });
+  axes.forEach((a,i)=>{
+    const [x,y]=pt(i,100);g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" class="axis"/>`;
+    const [lx,ly]=pt(i,124);
+    const anchor=Math.abs(lx-cx)<6?'middle':(lx>cx?'start':'end');
+    g+=`<text x="${lx}" y="${ly}" text-anchor="${anchor}" dominant-baseline="middle" class="axis-text">${esc(a)}</text>`;
+  });
+  series.forEach((s,si)=>{
+    const p=s.values.map((v,i)=>pt(i,v).join(',')).join(' ');
+    g+=`<polygon points="${p}" class="${si===0?'series-a':'series-b'}" style="opacity:0"><animate attributeName="opacity" to="1" dur=".9s" begin="${si*.25}s" fill="freeze"/></polygon>`;
+  });
+  return `<svg viewBox="0 0 ${size} ${size}" width="100%" role="img" aria-label="Radar chart of evidence dimensions">${g}</svg>`;
+}
+function hbars(rows,max){
+  max=max||Math.max(...rows.map(r=>r.v),1);
+  return '<div class="hbar">'+rows.map(r=>
+    `<div class="r"><span>${esc(r.k)}</span><span class="t"><i class="f" data-w="${Math.round(r.v/max*100)}"></i></span><span class="v">${r.d||r.v}</span></div>`
+  ).join('')+'</div>';
+}
+function donut(rows,size){
+  size=size||220;const total=rows.reduce((a,b)=>a+b.v,0)||1;const C=2*Math.PI*70;let off=0;
+  const cols=[cssVar('--emerald'),cssVar('--emerald-soft'),cssVar('--gold'),cssVar('--sage'),cssVar('--ink-faint'),cssVar('--ink-soft')];
+  const arcs=rows.map((r,i)=>{
+    const frac=r.v/total,dash=C*frac,el=`<circle cx="110" cy="110" r="70" fill="none" stroke="${cols[i%cols.length]}" stroke-width="26" stroke-dasharray="${dash} ${C-dash}" stroke-dashoffset="${-off}" transform="rotate(-90 110 110)"><animate attributeName="stroke-dasharray" from="0 ${C}" to="${dash} ${C-dash}" dur=".9s" fill="freeze"/></circle>`;
+    off+=dash;return el;
+  }).join('');
+  const legend=rows.map((r,i)=>`<span><i style="background:${cols[i%cols.length]}"></i>${esc(r.k)} · ${Math.round(r.v/total*100)}%</span>`).join('');
+  return `<svg viewBox="0 0 220 220" width="100%" style="max-width:${size}px;display:block;margin:0 auto" role="img" aria-label="Donut chart">${arcs}<text x="110" y="106" text-anchor="middle" class="axis-text" style="font-size:11px">TOTAL</text><text x="110" y="126" text-anchor="middle" fill="var(--ink)" style="font-family:var(--display);font-size:22px;font-weight:700">${total}</text></svg><div class="legend">${legend}</div>`;
+}
+function vbars(rows){
+  const max=Math.max(...rows.map(r=>r.v),1),W=320,H=170,bw=W/rows.length;
+  const bars=rows.map((r,i)=>{
+    const h=r.v/max*(H-34),x=i*bw+bw*.18,w=bw*.64,y=H-24-h;
+    return `<rect x="${x}" y="${H-24}" width="${w}" height="0" rx="4" fill="var(--emerald)" opacity=".85"><animate attributeName="height" to="${h}" dur=".8s" begin="${i*.06}s" fill="freeze"/><animate attributeName="y" to="${y}" dur=".8s" begin="${i*.06}s" fill="freeze"/></rect>
+    <text x="${x+w/2}" y="${H-9}" text-anchor="middle" class="axis-text">${esc(r.k)}</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Bar chart">${bars}<line x1="0" y1="${H-24}" x2="${W}" y2="${H-24}" class="axis"/></svg>`;
+}
+
+/* ==========================================================================
+   RENDER — stat strip
+   ========================================================================== */
+function renderStats(){
+  const humanStrong=COMPOUNDS.filter(c=>c.ev.human>=60).length;
+  const clinicalThin=COMPOUNDS.filter(c=>c.ev.clinical<40).length;
+  const rows=[
+    {n:COMPOUNDS.length,l:'Compounds mapped'},
+    {n:Object.keys(MODERN).length,l:'Modern comparators'},
+    {n:humanStrong,l:'With moderate human evidence'},
+    {n:clinicalThin,l:'With thin clinical evidence'}
+  ];
+  $('#statStrip').innerHTML=rows.map(r=>`<div class="stat"><div class="num" data-count="${r.n}">0</div><div class="lbl">${r.l}</div></div>`).join('');
+}
+
+/* ==========================================================================
+   RENDER — compound explorer
+   ========================================================================== */
+let activeCat='All',query='';
+function renderChips(){
+  $('#filterChips').innerHTML=CATEGORIES.map(c=>
+    `<button class="chip ${c===activeCat?'on':''}" data-cat="${c}">${c}</button>`).join('');
+}
+function renderGrid(){
+  const q=query.trim().toLowerCase();
+  const list=COMPOUNDS.filter(c=>{
+    const catOk=activeCat==='All'||c.cat.includes(activeCat);
+    const qOk=!q||[c.name,c.botanical,c.area,c.bioactive].join(' ').toLowerCase().includes(q);
+    return catOk&&qOk;
+  });
+  const grid=$('#compoundGrid');
+  if(!list.length){
+    grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><b>No compound matches that filter</b>Try a different research area, or clear the search box.</div>`;
+    return;
+  }
+  grid.innerHTML=list.map(c=>`
+    <button class="ccard" data-id="${c.id}" aria-label="Open evidence detail for ${esc(c.name)}">
+      <span class="glow"></span>
+      <span class="leaf">${c.emoji}</span>
+      <h3>${esc(c.name)}</h3>
+      <div class="bot">${esc(c.botanical)}</div>
+      <div class="meta">
+        <div class="row"><span>Research area</span><span>${esc(c.area)}</span></div>
+        <div class="row"><span>Compared with</span><span>${esc(MODERN[c.modern].name)}</span></div>
+        <div class="row"><span>Human evidence</span><span class="tier">${tierWord(c.ev.human)} ${dots(c.ev.human)}</span></div>
+        <div class="row"><span>Research activity</span><span class="tier">${tierWord(c.ev.volume)} ${dots(c.ev.volume)}</span></div>
+      </div>
+      <div class="cta">Explore evidence →</div>
+    </button>`).join('');
+}
+
+/* ==========================================================================
+   RENDER — compound detail drawer
+   ========================================================================== */
+const EV_LABELS={traditional:'Traditional use',preclinical:'Preclinical evidence',human:'Human evidence',clinical:'Clinical evidence',volume:'Research activity',mechanism:'Mechanistic plausibility'};
+let lastFocus=null;
+function openCompound(id){
+  const c=byId(id);if(!c)return;const m=MODERN[c.modern];
+  lastFocus=document.activeElement;
+  $('#drawerEyebrow').textContent=c.area;
+  $('#drawerTitle').innerHTML=`${c.emoji} ${esc(c.name)}`;
+  const bars=Object.keys(EV_LABELS).map(k=>`
+    <div class="bar-row">
+      <span>${EV_LABELS[k]}</span><span class="bar-val">${tierWord(c.ev[k])}</span>
+      <span class="bar-track"><i class="bar-fill" data-w="${c.ev[k]}"></i></span>
+    </div>`).join('');
+  const flow=[
+    {i:'🌿',t:'Source plant',d:c.botanical+' — '+c.traditional},
+    {i:'🧬',t:'Bioactive component',d:c.bioactive},
+    {i:'⚙️',t:'Proposed mechanism',d:c.mechanism},
+    {i:'🔬',t:'Preclinical research',d:tierWord(c.ev.preclinical)+' body of cell and animal work.'},
+    {i:'👥',t:'Human research',d:c.humanNote},
+    {i:'📚',t:'Clinical evidence',d:tierWord(c.ev.clinical)+' — '+(c.ev.clinical<40?'not enough replicated, well-controlled trial data to draw firm conclusions.':'some pooled trial evidence exists, though gaps remain.')}
+  ].map((s,i)=>`<div class="flow-step"><div class="flow-node">${s.i}</div><div><h5>${s.t}</h5><p>${esc(s.d)}</p></div></div>`).join('');
+
+  $('#drawerBody').innerHTML=`
+    <div class="block">
+      <h4>Profile</h4>
+      <dl class="kv">
+        <dt>Botanical</dt><dd><em>${esc(c.botanical)}</em></dd>
+        <dt>Bioactive</dt><dd>${esc(c.bioactive)}</dd>
+        <dt>Research area</dt><dd>${esc(c.area)}</dd>
+        <dt>Comparator</dt><dd>${esc(m.name)}</dd>
+        <dt>Traditional context</dt><dd>${esc(c.traditional)}</dd>
+      </dl>
+    </div>
+    <div class="block">
+      <h4>Evidence snapshot</h4>
+      <div class="bars">${bars}</div>
+      <div style="display:flex;align-items:center;gap:14px;margin-top:20px;flex-wrap:wrap">
+        <div><div class="bar-val">Aggregated evidence strength</div>
+        <div style="font-family:var(--display);font-size:32px;font-weight:800;color:var(--emerald-soft);letter-spacing:-.03em">${overall(c.ev)}<span style="font-size:15px;color:var(--ink-faint)">/100</span></div></div>
+        <button class="btn btn-sm" id="calcBtn" type="button">How is this calculated?</button>
+      </div>
+      <p class="note" style="margin-top:14px">This score is an illustrative aggregation of the evidence dimensions above. It is not a clinical efficacy score, and a higher number does not mean a compound works better.</p>
+    </div>
+    <div class="block">
+      <h4>Nature → molecule → mechanism → evidence</h4>
+      <div class="flow">${flow}</div>
+    </div>
+    <div class="block">
+      <h4>Known limitations</h4>
+      <p style="font-size:14.5px">${esc(c.limits)}</p>
+    </div>
+    <div class="block" style="border-color:rgba(201,162,39,.3)">
+      <h4 style="color:var(--gold)">Beside the modern comparator</h4>
+      <dl class="kv">
+        <dt>Intervention</dt><dd>${esc(m.name)}</dd>
+        <dt>Mechanism</dt><dd>${esc(m.mechanism)}</dd>
+        <dt>Evidence type</dt><dd>${esc(m.type)}</dd>
+        <dt>Limitations</dt><dd>${esc(m.limits)}</dd>
+      </dl>
+      <p class="note" style="margin-top:14px">Listing these side by side compares <em>what is known</em>, not what is more effective. Nothing here supports replacing a prescribed treatment.</p>
+    </div>
+    <div class="disclaim"><span>⚠</span><div>Educational content. Not medical advice, and not a treatment recommendation. Natural products can interact with medicines — check with a clinician.</div></div>`;
+  $('#drawer').classList.add('open');$('#drawerBg').classList.add('open');
+  document.body.style.overflow='hidden';
+  $('#drawer').scrollTop=0;$('#drawer').focus();
+  requestAnimationFrame(()=>{setTimeout(()=>$$('#drawerBody .bar-fill').forEach(b=>b.style.width=b.dataset.w+'%'),80)});
+  $('#calcBtn').addEventListener('click',()=>{
+    alert('How the aggregated score is built\n\nEach evidence dimension is rated 0–100 as an editorial description of how much research of that type exists. They are combined with these weights:\n\n• Clinical evidence 30%\n• Human evidence 28%\n• Preclinical evidence 14%\n• Research activity 10%\n• Mechanistic plausibility 10%\n• Traditional use 8%\n\nHuman and clinical evidence carry the most weight because they are the only categories that test effects in people. The result describes EVIDENCE AVAILABILITY, not effectiveness or safety.');
+  });
+}
+function closeDrawer(){
+  $('#drawer').classList.remove('open');$('#drawerBg').classList.remove('open');
+  document.body.style.overflow='';if(lastFocus)lastFocus.focus();
+}
+
+/* ==========================================================================
+   RENDER — pathway section
+   ========================================================================== */
+function renderFlowSection(){
+  $('#flowSelect').innerHTML=COMPOUNDS.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');
+  $('#stageNotes').innerHTML=STAGES.map(s=>
+    `<div class="flow-step"><div class="flow-node">${s.icon}</div><div><h5>${s.t}</h5><p>${esc(s.d)}</p></div></div>`).join('');
+  drawFlow(COMPOUNDS[0].id);
+  $('#flowSelect').addEventListener('change',e=>drawFlow(e.target.value));
+}
+function drawFlow(id){
+  const c=byId(id);
+  const steps=[
+    {i:'🌿',t:c.botanical,d:'Traditional use: '+tierWord(c.ev.traditional).toLowerCase()+' historical record.'},
+    {i:'🧬',t:c.bioactive,d:'The isolated component researchers actually study.'},
+    {i:'⚙️',t:'Proposed mechanism',d:c.mechanism},
+    {i:'🔬',t:'Preclinical research',d:tierWord(c.ev.preclinical)+' — laboratory and animal work.'},
+    {i:'👥',t:'Human research',d:c.humanNote},
+    {i:'📚',t:'Clinical evidence',d:tierWord(c.ev.clinical)+' — '+(c.ev.clinical<40?'the pathway currently stops short here.':'some pooled trial evidence is available.')}
+  ];
+  $('#flowSteps').innerHTML=steps.map(s=>
+    `<div class="flow-step"><div class="flow-node">${s.i}</div><div><h5>${esc(s.t)}</h5><p>${esc(s.d)}</p></div></div>`).join('');
+}
+
+/* ==========================================================================
+   RENDER — comparison lab
+   ========================================================================== */
+function renderLab(){
+  $('#labNatural').innerHTML=COMPOUNDS.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');
+  $('#labModern').innerHTML=Object.keys(MODERN).map(k=>`<option value="${k}">${esc(MODERN[k].name)}</option>`).join('');
+  $('#labModern').value=COMPOUNDS[0].modern;
+  $('#labCaution').innerHTML=[
+    {t:'More evidence is not the same as better',d:'A modern medicine scores high because it was required to run large trials, not because it is automatically the right choice for a person.'},
+    {t:'A gap is not a verdict',d:'“Limited human evidence” means the studies have not been done well or often enough — it does not mean the compound failed.'},
+    {t:'Nothing here is interchangeable',d:'Similar research areas do not make two things substitutes. Only a clinician can weigh a real case.'}
+  ].map(x=>`<div class="flow-step"><div class="flow-node">•</div><div><h5>${x.t}</h5><p>${esc(x.d)}</p></div></div>`).join('');
+  const upd=()=>drawLab($('#labNatural').value,$('#labModern').value);
+  $('#labNatural').addEventListener('change',()=>{$('#labModern').value=byId($('#labNatural').value).modern;upd()});
+  $('#labModern').addEventListener('change',upd);
+  upd();
+}
+function drawLab(cid,mid){
+  const c=byId(cid),m=MODERN[mid];
+  const rows=[
+    ['Primary research area',c.area,m.area],
+    ['Proposed mechanism',c.mechanism,m.mechanism],
+    ['Evidence type',tierWord(c.ev.human)+' human evidence, mostly small studies',m.type],
+    ['Human research',c.humanNote,'Established programme of trials in people'],
+    ['Research intensity',tierWord(c.ev.volume)+' publication activity',tierWord(m.ev.volume)+' publication activity'],
+    ['Known limitations',c.limits,m.limits],
+    ['Evidence gap',c.ev.clinical<40?'Replicated clinical trial evidence is the missing piece':'Consistency across trials is still being established','Gaps are mainly about long-term use and individual risk profiles']
+  ];
+  $('#labMatrix').innerHTML=`
+    <thead><tr><th>Dimension</th><th>${esc(c.name)}</th><th>${esc(m.name)}</th></tr></thead>
+    <tbody>${rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('')}</tbody>`;
+  const keys=['traditional','preclinical','human','clinical','volume','mechanism'];
+  const axes=['Traditional','Preclinical','Human','Clinical','Activity','Mechanism'];
+  $('#labRadar').innerHTML=radar([
+    {values:keys.map(k=>c.ev[k])},{values:keys.map(k=>m.ev[k])}
+  ],axes,320);
+}
+
+/* ==========================================================================
+   RENDER — evidence gap
+   ========================================================================== */
+const GAP_KEYS=['traditional','preclinical','human','clinical'];
+function renderGap(){
+  $('#gapRows').innerHTML=COMPOUNDS.map(c=>`
+    <div class="gap-row">
+      <div class="gap-name">${c.emoji} ${esc(c.name)}</div>
+      <div class="gap-track">${GAP_KEYS.map(k=>{
+        const v=c.ev[k];
+        return `<button class="gap-node" data-c="${c.id}" data-k="${k}" aria-label="${esc(c.name)}, ${EV_LABELS[k]}: ${tierWord(v)}"
+          style="background:linear-gradient(90deg,var(--emerald) ${v}%,var(--line) ${v}%);opacity:${.35+v/160}"></button>`;
+      }).join('')}</div>
+    </div>`).join('');
+}
+function selectGap(cid,k,btn){
+  const c=byId(cid),v=c.ev[k];
+  $$('.gap-node').forEach(n=>n.classList.remove('sel'));btn.classList.add('sel');
+  const explain={
+    traditional:'Documented household and classical use. It establishes familiarity and rough tolerability, not effect.',
+    preclinical:'Cell and animal research on the isolated compound. Useful for generating hypotheses; routinely fails to carry over into people.',
+    human:'Studies in actual participants. For most compounds here these are small, short and use different preparations.',
+    clinical:'Large, replicated, well-controlled trials pooled into reviews. This is where the field is thinnest.'
+  };
+  $('#gapDetail').innerHTML=`
+    <div class="eyebrow" style="margin-bottom:10px">${EV_LABELS[k]} · ${tierWord(v)}</div>
+    <h4>${c.emoji} ${esc(c.name)}</h4>
+    <p>${explain[k]}</p>
+    <p style="margin-top:12px;font-size:13.5px;color:var(--ink-faint)">Specific to this compound: ${esc(k==='human'?c.humanNote:k==='clinical'?c.limits:k==='preclinical'?c.mechanism:c.traditional)}</p>`;
+}
+
+/* ==========================================================================
+   SURVEY
+   ========================================================================== */
+let step=0,answers={},submitted=false;
+function renderSurvey(){
+  const shell=$('#surveyShell');
+  if(submitted){
+    shell.innerHTML=`
+      <div style="text-align:center;padding:16px 0">
+        <div class="done-mark">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--emerald-soft)" stroke-width="2"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
+        </div>
+        <h3 style="font-size:24px;margin-bottom:10px">Response recorded</h3>
+        <p style="color:var(--ink-soft);max-width:440px;margin:0 auto 22px">Your answers are now included in the dashboard below, alongside the responses already loaded.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <a href="#results" class="btn btn-primary">See the dashboard</a>
+          <button class="btn" id="againBtn" type="button">Answer again</button>
+        </div>
+      </div>`;
+    $('#againBtn').addEventListener('click',()=>{submitted=false;step=0;answers={};renderSurvey()});
+    return;
+  }
+  if(step===-1){
+    shell.innerHTML=`
+      <div class="eyebrow">Before you start</div>
+      <h3 style="font-size:26px;margin:16px 0 12px">Six questions, about a minute</h3>
+      <p style="color:var(--ink-soft);margin-bottom:8px">Your responses are used for educational aggregate analysis only.</p>
+      <p class="note" style="margin-bottom:24px">No name, email, phone number or medical history is collected. Nothing is linked back to you, and answers stay in this browser session unless a database is connected.</p>
+      <button class="btn btn-primary" id="startBtn" type="button">Start the survey</button>`;
+    $('#startBtn').addEventListener('click',()=>{step=0;renderSurvey()});
+    return;
+  }
+  const q=QUESTIONS[step],val=answers[q.id];
+  const cls=q.type==='scale'?'opts scale':q.type==='grid'?'opts two':'opts';
+  const opts=q.options.map((o,i)=>{
+    const on=val===o?'on':'';
+    if(q.type==='scale'){
+      const end=i===0?q.ends[0]:i===q.options.length-1?q.ends[1]:'';
+      return `<button class="opt ${on}" data-v="${esc(o)}" type="button"><span class="k">${o}</span><span style="font-size:11px;color:var(--ink-faint)">${end}</span></button>`;
+    }
+    return `<button class="opt ${on}" data-v="${esc(o)}" type="button"><span class="k">${String.fromCharCode(65+i)}</span><span>${esc(o)}</span></button>`;
+  }).join('');
+  shell.innerHTML=`
+    <div class="prog-top"><span>Question ${String(step+1).padStart(2,'0')} / 0${QUESTIONS.length}</span><span>${Math.round((step)/QUESTIONS.length*100)}% complete</span></div>
+    <div class="prog"><i style="width:${(step)/QUESTIONS.length*100}%"></i></div>
+    <h3 class="q-title">${esc(q.q)}</h3>
+    ${q.help?`<p class="q-help">${esc(q.help)}</p>`:''}
+    <div class="${cls}" id="optWrap" role="group" aria-label="${esc(q.q)}">${opts}</div>
+    <p class="err" id="qErr">Choose an option to continue.</p>
+    <div class="survey-nav">
+      <button class="btn" id="prevBtn" type="button" ${step===0?'disabled style="opacity:.4;cursor:not-allowed"':''}>Back</button>
+      <button class="btn btn-primary" id="nextBtn" type="button">${step===QUESTIONS.length-1?'Submit response':'Next question'}</button>
+    </div>`;
+  requestAnimationFrame(()=>{const p=$('.prog i');if(p)p.style.width=((step+ (val?1:0))/QUESTIONS.length*100)+'%'});
+  $('#optWrap').addEventListener('click',e=>{
+    const b=e.target.closest('.opt');if(!b)return;
+    answers[q.id]=b.dataset.v;
+    $$('#optWrap .opt').forEach(o=>o.classList.remove('on'));b.classList.add('on');
+    $('#qErr').classList.remove('show');
+  });
+  $('#prevBtn').addEventListener('click',()=>{if(step>0){step--;renderSurvey()}});
+  $('#nextBtn').addEventListener('click',()=>{
+    if(!answers[q.id]){$('#qErr').classList.add('show');return}
+    if(step===QUESTIONS.length-1){submitSurvey()}else{step++;renderSurvey()}
+  });
+}
+function submitSurvey(){
+  RESPONSES=RESPONSES.concat([Object.assign({},answers,{demo:false})]);
+  submitted=true;renderSurvey();renderResults();renderInsights();
+}
+
+/* ==========================================================================
+   RESULTS DASHBOARD
+   ========================================================================== */
+function renderResults(){
+  const R=RESPONSES,mine=R.filter(r=>!r.demo).length;
+  $('#resultsSourceLine').innerHTML= USING_DEMO
+    ? `Showing <b>${R.length}</b> responses — a clearly labelled demo dataset of ${R.length-mine} simulated answers, plus ${mine} real response${mine===1?'':'s'} from this session. Demo values exist to test the layout and are not real survey data.`
+    : `Showing ${R.length} collected responses.`;
+  if(!R.length){
+    $('#resultStats').style.display='none';
+    $('#resultCharts').innerHTML=`<div class="empty" style="grid-column:1/-1"><b>No responses yet</b>Your dataset will appear here once responses are collected.</div>`;
+    return;
+  }
+  $('#resultStats').style.display='';
+  const c1=countBy(R,'q1'),c3=countBy(R,'q3'),c6=countBy(R,'q6'),c2=countBy(R,'q2');
+  const t1=topOf(c1),t3=topOf(c3),t6=topOf(c6),a4=avg(R,'q4');
+  const stats=[
+    {n:R.length,l:'Total responses',raw:true},
+    {v:t1?t1.key:'—',l:'Most selected compound'},
+    {v:t3?t3.key:'—',l:'Most trusted source'},
+    {v:a4?a4.toFixed(1)+' / 5':'—',l:'Avg. importance of evidence'}
+  ];
+  $('#resultStats').innerHTML=stats.map(s=>`
+    <div class="stat">
+      <div class="num" ${s.raw?`data-count="${s.n}"`:''} style="${s.raw?'':'font-size:19px;line-height:1.25'}">${s.raw?0:esc(s.v)}</div>
+      <div class="lbl">${s.l}</div>
+    </div>`).join('');
+
+  const compRows=Object.keys(c1).map(k=>({k:k.split(' / ')[0].split(' (')[0],v:c1[k]})).sort((a,b)=>b.v-a.v).slice(0,8);
+  const trustRows=Object.keys(c3).map(k=>({k:k.replace('Government or public health sources','Public health'),v:c3[k]})).sort((a,b)=>b.v-a.v);
+  const areaRows=Object.keys(c6).map(k=>({k,v:c6[k]})).sort((a,b)=>b.v-a.v).slice(0,6);
+  const famRows=['1','2','3','4','5'].map(k=>({k,v:c2[k]||0}));
+  const percept=['q2','q4'].map(k=>avg(R,k)||0);
+  const yes=R.filter(r=>r.q5==='Yes').length;
+
+  $('#resultCharts').innerHTML=`
+    <div class="glass chart-card"><h4>Compound familiarity</h4><p class="cap">Most selected compounds, by number of responses.</p>${hbars(compRows)}</div>
+    <div class="glass chart-card"><h4>Where trust sits</h4><p class="cap">Source people check first for a health claim.</p>${donut(trustRows)}</div>
+    <div class="glass chart-card"><h4>Research interest</h4><p class="cap">Areas respondents most want compared.</p>${vbars(areaRows.map(r=>({k:r.k.split(' ')[0],v:r.v})))}</div>
+    <div class="glass chart-card"><h4>Familiarity distribution</h4><p class="cap">Self-rated familiarity with natural remedies, 1 to 5.</p>${vbars(famRows)}</div>
+    <div class="glass chart-card"><h4>Perception profile</h4><p class="cap">Average familiarity against average weight given to evidence.</p>
+      ${radar([{values:[percept[0]/5*100,percept[1]/5*100,yes/R.length*100,(c3['Scientific studies']||0)/R.length*100,(c3['Traditional knowledge']||0)/R.length*100,(c3['Doctors and clinicians']||0)/R.length*100]}],['Familiarity','Evidence weight','Want research','Trust: studies','Trust: tradition','Trust: doctors'],300)}
+    </div>
+    <div class="glass chart-card"><h4>Appetite for comparison</h4><p class="cap">Would like to see more research comparing the two approaches.</p>
+      <div style="font-family:var(--display);font-size:52px;font-weight:800;color:var(--emerald-soft);letter-spacing:-.04em;margin:14px 0 4px"><span data-count="${Math.round(yes/R.length*100)}">0</span>%</div>
+      <p style="color:var(--ink-soft);font-size:14px">answered “Yes”. ${R.length-yes} chose “No” or “Not sure”.</p>
+      <p class="note" style="margin-top:14px">Aggregate only. No individual response is stored or identifiable.</p>
+    </div>`;
+  animateBars();animateCounters();
+}
+
+/* ==========================================================================
+   INSIGHTS — every card computed, with an insufficient-data guard
+   ========================================================================== */
+function renderInsights(){
+  const most=[...COMPOUNDS].sort((a,b)=>b.ev.volume-a.ev.volume)[0];
+  const gap=[...COMPOUNDS].sort((a,b)=>((b.ev.traditional+b.ev.preclinical)-(b.ev.human+b.ev.clinical))-((a.ev.traditional+a.ev.preclinical)-(a.ev.human+a.ev.clinical)))[0];
+  const best=[...COMPOUNDS].sort((a,b)=>b.ev.human-a.ev.human)[0];
+  const areaCount={};COMPOUNDS.forEach(c=>c.cat.forEach(k=>areaCount[k]=(areaCount[k]||0)+1));
+  const topArea=topOf(areaCount);
+  const enough=RESPONSES.length>=10;
+  const t3=topOf(countBy(RESPONSES,'q3'));
+  const a4=avg(RESPONSES,'q4');
+  const cards=[
+    {l:'Most researched compound',v:most.name,s:tierWord(most.ev.volume)+' publication activity across preclinical and human work.'},
+    {l:'Widest evidence gap',v:gap.name,s:'Heavily used and heavily studied in the lab, with the least carried through to human and clinical research.'},
+    {l:'Strongest human evidence',v:best.name,s:best.humanNote},
+    {l:'Most compared category',v:topArea?topArea.key:'Insufficient data',s:topArea?topArea.n+' of '+COMPOUNDS.length+' compounds sit in this research area.':'Insufficient data for a reliable insight.'},
+    {l:'Most trusted source',v:enough&&t3?t3.key:'Insufficient data',s:enough&&t3?Math.round(t3.n/RESPONSES.length*100)+'% of loaded responses chose it first.':'Insufficient data for a reliable insight — fewer than 10 responses loaded.'},
+    {l:'Weight given to evidence',v:enough&&a4?a4.toFixed(1)+' / 5':'Insufficient data',s:enough?'Average rating of how important scientific evidence is when judging a natural compound.':'Insufficient data for a reliable insight.'}
+  ];
+  $('#insightGrid').innerHTML=cards.map(c=>`
+    <div class="glass ins"><div class="lbl">${c.l}</div><div class="val">${esc(c.v)}</div><div class="sub">${esc(c.s)}</div></div>`).join('');
+}
+
+/* ==========================================================================
+   METHODOLOGY + SOURCES
+   ========================================================================== */
+function renderMethod(){
+  const items=[
+    ['What counts as traditional use','Documented use in classical texts or sustained household practice. It tells you a preparation is familiar and broadly tolerated in ordinary use. It is not evidence of an effect on a defined condition, and it is not a safety guarantee at concentrated or extracted doses.'],
+    ['What counts as preclinical evidence','Work in cells, tissues or animals on an isolated compound. It shows biological activity is possible and points to a mechanism worth testing. The large majority of promising preclinical findings do not reproduce in people.'],
+    ['What counts as human evidence','Studies in people — including small, short or single-site trials, often measuring surrogate markers rather than outcomes that matter. Most compounds on this platform sit here.'],
+    ['What counts as clinical evidence','Large, well-controlled, replicated trials with meaningful endpoints, ideally pooled in systematic reviews. This is the standard a modern medicine must clear before approval, and it is where the natural-compound field is thinnest.'],
+    ['How the ratings were produced','Each dimension is an editorial 0–100 rating written for teaching, describing how much research of that kind exists. They are not extracted from a database, not measured effect sizes, and not trial results. The aggregated score weights clinical (30%) and human (28%) evidence most heavily, then preclinical (14%), research activity (10%), mechanism (10%) and traditional use (8%).'],
+    ['How survey results are calculated','Every dashboard figure is a straight count or mean over the responses currently loaded. No weighting, no imputation. Where fewer than ten responses exist, insight cards say so rather than reporting a number.'],
+    ['Limitations of this platform','The dataset is small and curated. Compound entries summarise a research landscape rather than any single study. The demo responses are simulated and labelled as such. Nothing here is peer reviewed, and nothing here should be cited as a source of clinical fact.'],
+    ['What this platform will not do','It does not diagnose, prescribe, rank treatments by effectiveness, suggest stopping any medicine, or claim a natural product replaces conventional care. Where evidence does not exist, it says the evidence does not exist.']
+  ];
+  $('#methodAcc').innerHTML=items.map((it,i)=>
+    `<details class="acc" ${i===0?'open':''}><summary>${it[0]}</summary><div class="acc-body">${it[1]}</div></details>`).join('');
+  $('#srcList').innerHTML=SOURCES.map(s=>
+    `<a class="src" href="${s.u}" target="_blank" rel="noopener"><b>${s.t} ↗</b><span>${s.d}</span></a>`).join('');
+}
+
+/* ==========================================================================
+   MOTION + CHROME
+   ========================================================================== */
+function animateBars(){
+  setTimeout(()=>$$('.bar-fill[data-w], .hbar .f[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%'}),120);
+}
+function animateCounters(){
+  $$('[data-count]').forEach(el=>{
+    if(el.dataset.done)return;el.dataset.done='1';
+    const target=Number(el.dataset.count)||0,dur=1100,t0=performance.now();
+    const tick=t=>{
+      const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*e).toLocaleString();
+      if(p<1)requestAnimationFrame(tick);
+    };requestAnimationFrame(tick);
+  });
+}
+function setupReveal(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');
+      $$('[data-count]',e.target).length&&animateCounters();
+      $$('.bar-fill[data-w], .hbar .f[data-w]',e.target).forEach(b=>b.style.width=b.dataset.w+'%');
+      io.unobserve(e.target);}
+  }),{threshold:.14,rootMargin:'0px 0px -40px 0px'});
+  $$('.rv').forEach(el=>io.observe(el));
+}
+function setupNav(){
+  const nav=$('#nav');
+  const onScroll=()=>{
+    nav.classList.toggle('scrolled',window.scrollY>24);
+    $('#navCta').style.display=window.scrollY>420?'inline-flex':'none';
+    let cur='home';
+    $$('main section[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-140)cur=s.id});
+    $$('#navLinks a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+  };
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  const mm=$('#mobileMenu');
+  $('#burger').addEventListener('click',()=>{
+    const open=mm.style.display==='flex';
+    mm.style.display=open?'none':'flex';
+    $('#burger').setAttribute('aria-expanded',String(!open));
+  });
+  $$('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>{mm.style.display='none';$('#burger').setAttribute('aria-expanded','false')}));
+}
+function setupTheme(){
+  let saved=null;try{saved=localStorage.getItem('n2p-theme')}catch(e){}
+  if(saved)document.documentElement.dataset.theme=saved;
+  const paint=()=>{
+    const dark=document.documentElement.dataset.theme==='dark';
+    $('#themeIcon').innerHTML=dark
+      ?'<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'
+      :'<path d="M20 14.5A8.2 8.2 0 019.5 4 8.3 8.3 0 1020 14.5z"/>';
+  };paint();
+  $('#themeBtn').addEventListener('click',()=>{
+    const next=document.documentElement.dataset.theme==='dark'?'light':'dark';
+    document.documentElement.dataset.theme=next;paint();
+    try{localStorage.setItem('n2p-theme',next)}catch(e){}
+    renderResults();
+  });
+}
+
+/* ==========================================================================
+   BOOT
+   ========================================================================== */
+function init(){
+  renderStats();renderChips();renderGrid();renderFlowSection();renderLab();renderGap();
+  step=-1;renderSurvey();renderResults();renderInsights();renderMethod();
+  $('#footCredit').textContent='Nature to Pharmacy · '+new Date().getFullYear();
+
+  $('#filterChips').addEventListener('click',e=>{
+    const b=e.target.closest('.chip');if(!b)return;
+    activeCat=b.dataset.cat;renderChips();renderGrid();
+  });
+  $('#searchInput').addEventListener('input',e=>{query=e.target.value;renderGrid()});
+  $('#compoundGrid').addEventListener('click',e=>{
+    const card=e.target.closest('.ccard');if(card)openCompound(card.dataset.id);
+  });
+  $('#gapRows').addEventListener('click',e=>{
+    const n=e.target.closest('.gap-node');if(n)selectGap(n.dataset.c,n.dataset.k,n);
+  });
+  $('#drawerClose').addEventListener('click',closeDrawer);
+  $('#drawerBg').addEventListener('click',closeDrawer);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#drawer').classList.contains('open'))closeDrawer()});
+  setupNav();setupTheme();setupReveal();animateCounters();animateBars();
+}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
